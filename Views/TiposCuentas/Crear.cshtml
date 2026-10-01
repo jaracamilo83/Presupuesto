@@ -1,0 +1,19 @@
+﻿@model TipoCuenta
+
+@{
+    ViewData["Title"] = "Crear Tipo Cuenta";
+}
+<h1>Crear Tipo Cuenta</h1>
+<h5>
+    El tiepo de cuenta se refiere a cómo podemos agrupar cuentas.
+    Ejemplos: Préstamos, tarjetas de crédito, etc.
+</h5>
+
+<form asp-action="Crear">
+    <div class="mb-3">
+        <label for="Nombre" class="form-label">Nombre</label>
+        <input class="form-control" type="text" id="Nombre" name="Nombre"/>
+    </div>
+    
+    <button class="btn btn-primary" type="submit">Enviar</button>
+</form>
