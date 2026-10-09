@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Presupuestos.Models;
 
@@ -9,6 +10,7 @@ public class TipoCuenta: IValidatableObject
     [Display(Name = "Nombre")]
     [StringLength(maximumLength:50, MinimumLength = 3, ErrorMessage = "El campo {0} debet tener una longitud entre {1} y {2}")]
    // [PrimeraLetraMayuscula]
+   [Remote(action:"ExisteTipoCuenta",controller:"TiposCuentas")]
     public string Nombre { get; set; }
     public int UsuarioId { get; set; }
     public int Orden { get; set; }

@@ -13,11 +13,19 @@ public class RepositorioTiposCuenta:IRepositorioTiposCuenta
         connectionString = configuration.GetConnectionString("DefaultConnection");
     }
 
-    public void Crear(TipoCuenta tipoCuenta)
+    public async Task Crear(TipoCuenta tipoCuenta)
     {
         using var connection = new MySqlConnection(connectionString);
-        var rows = connection.Execute(@"INSERT INTO TiposCuentas(Nombre,UsuarioId,Orden) VALUES (@nombre,@usuarioId,0);", tipoCuenta);
+        var rows = connection.ExecuteAsync(@"INSERT INTO TiposCuentas(Nombre,UsuarioId,Orden) VALUES (@nombre,@usuarioId,0);", tipoCuenta);
         Console.WriteLine($"Filas insertadas {rows}");
         
+    }
+
+    public async Task<bool> Existe(string nombre, int usuarioId)
+    {
+        string sql = @"SELECT * FROM TiposCuentas WHERE usuarioId = @usuarioId AND nombre =@nombre";
+        using var connection = new MySqlConnection(connectionString);
+        int existe = await connection.QueryFirstOrDefaultAsync<int>(sql, new { nombre, usuarioId });
+        return existe == 1;
     }
 }
