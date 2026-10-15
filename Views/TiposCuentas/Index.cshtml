@@ -1,0 +1,29 @@
+﻿@model IEnumerable<TipoCuenta>
+@{
+    ViewData["Title"] = "Tipos Cuentas";
+}
+
+<h3>Tipos de cuentas bancarias</h3>
+<a class="btn btn-primary" asp-action="Crear" asp-controller="TiposCuentas">Crear</a>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>    
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var tiposCuentas in Model)
+        {
+            <tr>
+                <td>@tiposCuentas.Nombre</td>
+                <td>
+                    <a class="btn btn-info" >Editar</a>
+                    <a class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

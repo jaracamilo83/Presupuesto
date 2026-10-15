@@ -4,6 +4,7 @@ namespace Presupuestos;
 
 public interface IRepositorioTiposCuenta
 {
-    public Task  Crear(TipoCuenta tipoCuenta);
-    public Task<bool> Existe(string nombre, int usuarioId);
+    Task  Crear(TipoCuenta tipoCuenta);
+    Task<bool> Existe(string nombre, int usuarioId);
+    Task<IEnumerable<TipoCuenta>> Obtener(int usuarioId);
 }
