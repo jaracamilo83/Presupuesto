@@ -35,4 +35,22 @@ public class RepositorioTiposCuenta:IRepositorioTiposCuenta
         using var connection = new MySqlConnection(connectionString);
         return await connection.QueryAsync<TipoCuenta>(sql, new {usuarioId});
     }
+    
+    public async Task<TipoCuenta> ObtenerTipoCuentaId(int tipoCuentaId, int usuarioId)
+    {
+        using var connection = new MySqlConnection(connectionString);
+        return await connection.QuerySingleOrDefaultAsync<TipoCuenta>(
+            @"SELECT Id, Nombre, UsuarioId FROM TiposCuentas WHERE Id= @TipoCuentaId AND UsuarioId = @UsuarioId",
+            new { tipoCuentaId, usuarioId });
+    }
+
+    public async Task<bool> Actualizar(TipoCuenta tipoCuenta)
+    {
+        using var connection = new MySqlConnection(connectionString);
+        int actualizacion = await 
+            connection.ExecuteAsync(
+                @"UPDATE TiposCuentas SET Nombre = @Nombre WHERE Id = @Id AND UsuarioId = @UsuarioId",
+                new { tipoCuenta.Nombre, tipoCuenta.Id, tipoCuenta.UsuarioId });
+        return actualizacion == 1;
+    }
 }

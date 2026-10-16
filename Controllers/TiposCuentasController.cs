@@ -58,5 +58,31 @@ namespace Presupuestos.Controllers
             return Json(true);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Editar(int tipoCuentaId)
+        {
+            int usuarioId = usuarioService.ObtenerUsuarioId();
+            var tipoCuenta = await repositorioTiposCuenta.ObtenerTipoCuentaId(tipoCuentaId, usuarioId);
+            if (tipoCuenta == null)
+            {
+                ViewBag.Error = "No se ha definido el tipo cuenta";
+                return RedirectToAction("Index");
+            }
+            return View(tipoCuenta);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Editar(TipoCuenta tipoCuenta)
+        {
+            tipoCuenta.UsuarioId = usuarioService.ObtenerUsuarioId();
+            bool actualizacion = await repositorioTiposCuenta.Actualizar(tipoCuenta);
+            if (!actualizacion)
+            {
+                ViewBag.Error = "No se ha actualizado el tipo cuenta";
+                return View();
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }

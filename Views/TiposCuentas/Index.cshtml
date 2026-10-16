@@ -4,7 +4,15 @@
 }
 
 <h3>Tipos de cuentas bancarias</h3>
-<a class="btn btn-primary" asp-action="Crear" asp-controller="TiposCuentas">Crear</a>
+@if (ViewBag.Error != null)
+{
+    <div class="alert text-danger" role="alert">
+        <p>@ViewBag.Error</p>
+    </div>
+}
+
+<a class="btn btn-primary mb-3" asp-action="Crear" asp-controller="TiposCuentas">Crear</a>
+
 <div class="container">
     <table class="table">
         <thead>
@@ -19,7 +27,7 @@
             <tr>
                 <td>@tiposCuentas.Nombre</td>
                 <td>
-                    <a class="btn btn-info" >Editar</a>
+                    <a class="btn btn-info" asp-action="Editar" asp-route-tipoCuentaId="@tiposCuentas.Id">Editar</a>
                     <a class="btn btn-danger">Eliminar</a>
                 </td>
             </tr>
