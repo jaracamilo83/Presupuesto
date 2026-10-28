@@ -28,7 +28,7 @@
                 <td>@tiposCuentas.Nombre</td>
                 <td>
                     <a class="btn btn-info" asp-action="Editar" asp-route-tipoCuentaId="@tiposCuentas.Id">Editar</a>
-                    <a class="btn btn-danger">Eliminar</a>
+                    <a class="btn btn-danger" onclick="EliminarTipoCuenta(@tiposCuentas.Id)">Eliminar</a>
                 </td>
             </tr>
         }

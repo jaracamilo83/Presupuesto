@@ -84,5 +84,17 @@ namespace Presupuestos.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Eliminar(int tipoCuentaId)
+        {
+            int usuarioId = usuarioService.ObtenerUsuarioId();
+            bool eliminar = await repositorioTiposCuenta.Eliminar(tipoCuentaId, usuarioId);
+            if (!eliminar)
+            {
+                return Json($"No se ha eliminado correctamente");
+            }
+
+            return Ok();
+        }
     }
 }

@@ -53,4 +53,16 @@ public class RepositorioTiposCuenta:IRepositorioTiposCuenta
                 new { tipoCuenta.Nombre, tipoCuenta.Id, tipoCuenta.UsuarioId });
         return actualizacion == 1;
     }
+
+    public async Task<bool> Eliminar(int tipoCuentaId, int usuarioId)
+    {
+        using var connection = new MySqlConnection(connectionString);
+        int eliminar = await connection.ExecuteAsync(
+            @"DELETE FROM TiposCuentas WHERE Id= @tipoCuentaId AND UsuarioId = @usuarioId", new
+            {
+                tipoCuentaId, usuarioId
+            });
+        
+        return  eliminar == 1;
+    }
 }
