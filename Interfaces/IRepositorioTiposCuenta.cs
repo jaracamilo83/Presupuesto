@@ -10,4 +10,5 @@ public interface IRepositorioTiposCuenta
     Task<TipoCuenta> ObtenerTipoCuentaId(int tipoCuentaId, int usuarioId);
     Task<bool> Actualizar(TipoCuenta tipoCuenta);
     Task<bool> Eliminar(int tipoCuentaId, int usuarioId);
+    Task Ordenar(IEnumerable<TipoCuenta> tiposCuentas);
 }

@@ -16,17 +16,18 @@
 <div class="container">
     <table class="table">
         <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Acciones</th>    
-            </tr>
+        <tr>
+            <th>Nombre</th>
+            <th>Acciones</th>    
+        </tr>
         </thead>
-        <tbody>
+        <tbody id="reordenable">
         @foreach (var tiposCuentas in Model)
         {
-            <tr>
+            <tr >
                 <td>@tiposCuentas.Nombre</td>
                 <td>
+                    <input type="hidden" value="@tiposCuentas.Id" class="ids"/>
                     <a class="btn btn-info" asp-action="Editar" asp-route-tipoCuentaId="@tiposCuentas.Id">Editar</a>
                     <a class="btn btn-danger" onclick="EliminarTipoCuenta(@tiposCuentas.Id)">Eliminar</a>
                 </td>
@@ -35,3 +36,50 @@
         </tbody>
     </table>
 </div>
+
+@section Scripts
+{
+    <script>
+        
+        const url = '@Url.Action("OrdenarTiposCuentas")';
+        $(function(){
+            $("#reordenable").sortable({
+                stop: async function(event, ui){
+                    await ordenarTiposCuentas();
+                }
+            });
+        });
+        
+        async function ordenarTiposCuentas()
+        {
+            const ids = obtenerIds();
+            await enviarIds(ids);
+        }
+        function obtenerIds(){
+            const ids = document.querySelectorAll(".ids");
+            const listIds = Array.from(ids).map(input => Number(input.value));
+            return listIds;
+        }
+        
+        async function enviarIds(ids){
+            var data = JSON.stringify(ids);
+           const response = await fetch(url,{
+                method: "POST",
+                body: data,
+                headers:{
+                    "Content-Type": "application/json"
+                }
+            });
+           
+           if(!response.ok)
+           {
+               console.error("Error al actualizar el orden de los tipos cuentas", response.status);
+               return;
+           }
+           
+           console.log("El orden de los tipos cuentas", response.body);
+        }
+
+    </script>
+    
+}

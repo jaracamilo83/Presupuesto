@@ -31,7 +31,7 @@ public class RepositorioTiposCuenta:IRepositorioTiposCuenta
 
     public async Task<IEnumerable<TipoCuenta>> Obtener(int usuarioId)
     {
-        string sql = @"SELECT * FROM TiposCuentas WHERE usuarioId = @usuarioId";
+        string sql = @"SELECT * FROM TiposCuentas WHERE usuarioId = @usuarioId ORDER BY Orden ASC";
         using var connection = new MySqlConnection(connectionString);
         return await connection.QueryAsync<TipoCuenta>(sql, new {usuarioId});
     }
@@ -64,5 +64,12 @@ public class RepositorioTiposCuenta:IRepositorioTiposCuenta
             });
         
         return  eliminar == 1;
+    }
+
+    public async Task Ordenar(IEnumerable<TipoCuenta> tiposCuentas)
+    {
+        using var connection = new MySqlConnection(connectionString);
+        var query = @"UPDATE TiposCuentas SET Orden = @Orden WHERE Id = @Id";
+        await connection.ExecuteAsync(query, tiposCuentas);
     }
 }
