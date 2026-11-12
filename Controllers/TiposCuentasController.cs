@@ -111,7 +111,11 @@ namespace Presupuestos.Controllers
             }
 
             var tiposCuentasOrdenados =
-                ids.Select((valor, indice) => new TipoCuenta() { Id = valor, Orden = indice + 1}).AsEnumerable();
+                idsTipoCuentas.Select((valor, indice) => new TipoCuenta() { Id = valor, Orden = indice + 1}).AsEnumerable();
+            foreach (var item in idsTipoCuentas)
+            {
+                Console.WriteLine(item);
+            }
             await repositorioTiposCuenta.Ordenar(tiposCuentasOrdenados);
             return Ok();
         }
