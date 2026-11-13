@@ -5,7 +5,7 @@ namespace Presupuestos;
 
 public class Cuenta
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
     
     [Required(ErrorMessage = "El campo {0} es obligatorio")]
     [StringLength(maximumLength:50, ErrorMessage = "La longitud maxima del campo {0} es de {1} caracteres")]

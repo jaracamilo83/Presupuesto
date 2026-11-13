@@ -4,5 +4,5 @@ namespace Presupuestos;
 
 public class CrearCuentaViewModel: Cuenta
 {
-    public IEnumerable<SelectListItem>  TiposCuentas { get; set; }
+    public IEnumerable<SelectListItem>?  TiposCuentas { get; set; }
 }
