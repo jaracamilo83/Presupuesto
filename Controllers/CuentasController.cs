@@ -20,9 +20,17 @@ namespace Presupuestos.Controllers
             this._mapper = mapper;
         }
         // GET: CuentasController
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var usuarioId = _repositorioUsuario.ObtenerUsuarioId();
+            var cuentas =  await _repositorioCuenta.ObtenerCuentas(usuarioId);
+            var modelo = cuentas.GroupBy(x => x.TipoCuenta).Select(grupo => new IndexCuentaViewModel
+            {
+                TipoCuenta = grupo.Key,
+                Cuentas = grupo.AsEnumerable()
+            }).ToList();
+                        
+            return View(modelo);
         }
 
         [HttpGet]
@@ -34,11 +42,10 @@ namespace Presupuestos.Controllers
         }
 
         [HttpPost]
-
         public async Task<IActionResult> Crear(CrearCuentaViewModel modelo)
         {
-            await ObtenerTiposCuenta(modelo);
-            foreach (var item in ModelState)
+           await ObtenerTiposCuenta(modelo);
+           /*  foreach (var item in ModelState)
             {
                 string propiedad = item.Key;
 
@@ -47,7 +54,7 @@ namespace Presupuestos.Controllers
                     Console.WriteLine($"Propiedad: {propiedad}");
                     Console.WriteLine($"Error: {error.ErrorMessage}");
                 }
-            }
+            }*/
             
             if (!ModelState.IsValid)
             {

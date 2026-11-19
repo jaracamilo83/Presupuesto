@@ -16,4 +16,16 @@ public class RepositorioCuenta: IRepositorioCuenta
         var rows = await connection.ExecuteAsync(sql, modelo);
         return rows > 0;
     }
+
+     public async Task<IEnumerable<Cuenta>> ObtenerCuentas(int usuarioId)
+     {
+         using var connection = new MySqlConnection(connectionString);
+         string sql = @"SELECT c.Id, c.Nombre AS Cuenta, Balance, tc.Nombre AS TipoCuenta
+                        FROM Cuentas c
+                        INNER JOIN TiposCuentas tc ON  c.TipoCuentaId = tc.Id
+                        WHERE tc.UsuarioId = @UsuarioId
+                        ORDER BY TipoCuenta ASC";
+         
+         return await connection.QueryAsync<Cuenta>(sql, new { UsuarioId = usuarioId });
+     }
 }

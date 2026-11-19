@@ -14,6 +14,8 @@ public class Cuenta
     
     [DisplayName("Tipo Cuenta")]
     public int TipoCuentaId { get; set; }
+
+    public string TipoCuenta { get; set; }
     
     public decimal Balance { get; set; }
     

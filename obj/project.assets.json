@@ -2,18 +2,15 @@
   "version": 3,
   "targets": {
     "net10.0": {
-      "AutoMapper/17.0.0": {
+      "AutoMapper/14.0.0": {
         "type": "package",
-        "dependencies": {
-          "Microsoft.IdentityModel.JsonWebTokens": "8.14.0"
-        },
         "compile": {
-          "lib/net10.0/AutoMapper.dll": {
+          "lib/net8.0/AutoMapper.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net10.0/AutoMapper.dll": {
+          "lib/net8.0/AutoMapper.dll": {
             "related": ".xml"
           }
         }
@@ -365,26 +362,19 @@
     }
   },
   "libraries": {
-    "AutoMapper/17.0.0": {
-      "sha512": "SQaIR+EKMkvyPqO1siHJXk286tjSSVSpZavFYxhMV4eq9DAL8sXMjNwqEZcu+C1R52aucNEnPkphhtGpGqoTVA==",
+    "AutoMapper/14.0.0": {
+      "sha512": "OC+1neAPM4oCCqQj3g2GJ2shziNNhOkxmNB9cVS8jtx4JbgmRzLcUOxB9Tsz6cVPHugdkHgCaCrTjjSI0Z5sCQ==",
       "type": "package",
-      "path": "automapper/17.0.0",
+      "path": "automapper/14.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.md",
         "README.md",
-        "automapper.17.0.0.nupkg.sha512",
+        "automapper.14.0.0.nupkg.sha512",
         "automapper.nuspec",
         "icon.png",
-        "lib/net10.0/AutoMapper.dll",
-        "lib/net10.0/AutoMapper.xml",
-        "lib/net11.0/AutoMapper.dll",
-        "lib/net11.0/AutoMapper.xml",
-        "lib/net471/AutoMapper.dll",
-        "lib/net471/AutoMapper.xml",
-        "lib/netstandard2.0/AutoMapper.dll",
-        "lib/netstandard2.0/AutoMapper.xml"
+        "lib/net8.0/AutoMapper.dll",
+        "lib/net8.0/AutoMapper.xml"
       ]
     },
     "Dapper/2.1.89": {
@@ -884,7 +874,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
-      "AutoMapper >= 17.0.0",
+      "AutoMapper >= 14.0.0",
       "Dapper >= 2.1.89",
       "Microsoft.Data.SqlClient >= 7.1.1",
       "MySqlConnector >= 2.6.2"
@@ -936,7 +926,7 @@
         "dependencies": {
           "AutoMapper": {
             "target": "Package",
-            "version": "[17.0.0, )"
+            "version": "[14.0.0, )"
           },
           "Dapper": {
             "target": "Package",
@@ -1389,6 +1379,36 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'AutoMapper' 14.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-6vhm-j9h7-f9gh",
+      "libraryId": "AutoMapper",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'AutoMapper' 14.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-gpwp-5797-mjff",
+      "libraryId": "AutoMapper",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'AutoMapper' 14.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-rvv3-g6hj-g44x",
+      "libraryId": "AutoMapper",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
     {
       "code": "NU1902",
       "level": "Warning",
