@@ -62,7 +62,6 @@ namespace Presupuestos.Controllers
             }
 
             var cuenta = _mapper.Map<Cuenta>(modelo);
-            Console.WriteLine(cuenta);
             bool cuentaCreada = await _repositorioCuenta.CrearCuenta(cuenta);
             if (!cuentaCreada)
             {
@@ -70,6 +69,35 @@ namespace Presupuestos.Controllers
                 return View(modelo);
             }
             return View("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Editar(int id)
+        {
+            int usuarioId = _repositorioUsuario.ObtenerUsuarioId();
+            Console.WriteLine(id + "" + usuarioId);
+            var cuenta = await _repositorioCuenta.ObtenerCuenta(id, usuarioId);
+            
+            if (cuenta is null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var cuentaViewModel = _mapper.Map<CrearCuentaViewModel>(cuenta);
+            ObtenerTiposCuenta(cuentaViewModel);
+            return View(cuentaViewModel);
+        }
+    
+        [HttpPost]
+        public async Task<IActionResult> Editar(CrearCuentaViewModel modelo)
+        {
+            int  usuarioId = _repositorioUsuario.ObtenerUsuarioId();
+            var cuenta = _mapper.Map<Cuenta>(modelo);
+            if (cuenta is null)
+            {
+                return RedirectToAction("Index");
+            }
+            await _repositorioCuenta.EditarCuenta(cuenta);
+            return RedirectToAction("Index");
         }
 
         private async Task ObtenerTiposCuenta(CrearCuentaViewModel modelo)

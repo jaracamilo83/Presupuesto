@@ -20,12 +20,29 @@ public class RepositorioCuenta: IRepositorioCuenta
      public async Task<IEnumerable<Cuenta>> ObtenerCuentas(int usuarioId)
      {
          using var connection = new MySqlConnection(connectionString);
-         string sql = @"SELECT c.Id, c.Nombre AS Cuenta, Balance, tc.Nombre AS TipoCuenta
+         string sql = @"SELECT c.Id, c.Nombre, Balance, tc.Nombre AS TipoCuenta
                         FROM Cuentas c
                         INNER JOIN TiposCuentas tc ON  c.TipoCuentaId = tc.Id
                         WHERE tc.UsuarioId = @UsuarioId
                         ORDER BY TipoCuenta ASC";
          
          return await connection.QueryAsync<Cuenta>(sql, new { UsuarioId = usuarioId });
+     }
+
+     public async Task<Cuenta> ObtenerCuenta(int cuentaId,int usuarioId)
+     {
+         using var connection = new MySqlConnection(connectionString);
+         string sql = @"SELECT c.Id, c.Nombre, Balance, c.TipoCuentaId, tc.Nombre AS TipoCuenta, c.Descripcion
+                        FROM Cuentas c
+                        INNER JOIN TiposCuentas tc ON  c.TipoCuentaId = tc.Id
+                        WHERE c.Id = @CuentaId AND tc.UsuarioId = @UsuarioId";
+         return await connection.QueryFirstOrDefaultAsync<Cuenta>(sql, new { cuentaId, usuarioId });
+     }
+
+     public async Task EditarCuenta(Cuenta modelo)
+     {
+         using var connection = new MySqlConnection(connectionString);
+         string sql = @"UPDATE Cuentas SET Nombre = @Nombre, Balance = @Balance, Descripcion = @Descripcion, TipoCuentaId = @TipoCuentaId WHERE Id = @Id;";
+         await connection.ExecuteAsync(sql, modelo);
      }
 }
