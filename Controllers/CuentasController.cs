@@ -99,6 +99,14 @@ namespace Presupuestos.Controllers
             await _repositorioCuenta.EditarCuenta(cuenta);
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public async Task<IActionResult> Borrar(int id)
+        {
+            int usuarioId = _repositorioUsuario.ObtenerUsuarioId();
+            var cuenta =  await _repositorioCuenta.ObtenerCuenta(id, usuarioId);
+            await _repositorioCuenta.EliminarCuenta(cuenta);
+            return RedirectToAction("Index");
+        }
 
         private async Task ObtenerTiposCuenta(CrearCuentaViewModel modelo)
         {

@@ -45,4 +45,11 @@ public class RepositorioCuenta: IRepositorioCuenta
          string sql = @"UPDATE Cuentas SET Nombre = @Nombre, Balance = @Balance, Descripcion = @Descripcion, TipoCuentaId = @TipoCuentaId WHERE Id = @Id;";
          await connection.ExecuteAsync(sql, modelo);
      }
+
+     public async Task EliminarCuenta(Cuenta cuenta)
+     {
+         using var connection = new MySqlConnection(connectionString);
+         string sql = @"DELETE FROM Cuentas WHERE Id = @Id;";
+         await connection.ExecuteAsync(sql, cuenta);
+     }
 }

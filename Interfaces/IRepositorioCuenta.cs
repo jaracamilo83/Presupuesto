@@ -6,4 +6,5 @@ public interface IRepositorioCuenta
     Task<IEnumerable<Cuenta>> ObtenerCuentas(int usuarioId);
     Task<Cuenta> ObtenerCuenta(int cuentaId, int usuarioId);
     Task EditarCuenta(Cuenta modelo);
+    Task EliminarCuenta(Cuenta cuenta);
 }
