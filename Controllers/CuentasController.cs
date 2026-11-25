@@ -74,7 +74,6 @@ namespace Presupuestos.Controllers
         public async Task<IActionResult> Editar(int id)
         {
             int usuarioId = _repositorioUsuario.ObtenerUsuarioId();
-            Console.WriteLine(id + "" + usuarioId);
             var cuenta = await _repositorioCuenta.ObtenerCuenta(id, usuarioId);
             
             if (cuenta is null)

@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IRepositorioTiposCuenta, RepositorioTiposCuenta>();
 builder.Services.AddTransient<IUsuarioService, UsuarioService>();
 builder.Services.AddTransient<IRepositorioCuenta, RepositorioCuenta>();
+builder.Services.AddTransient<IRepositorioCategoria, RepositorioCategoria>();
 
 builder.Services.AddAutoMapper(cfg =>
 {
