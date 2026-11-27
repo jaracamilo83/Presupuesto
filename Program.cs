@@ -1,4 +1,5 @@
 using Presupuestos;
+using Presupuestos.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddTransient<IRepositorioCategoria, RepositorioCategoria>();
 builder.Services.AddAutoMapper(cfg =>
 {
     cfg.CreateMap<Cuenta,CrearCuentaViewModel>();
+    cfg.CreateMap<Categoria,CrearCategoriaViewModel>();
 });
 
 var app = builder.Build();
